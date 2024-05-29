@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Boyfriend?</title>
+    <style>
+        body {
+            background-color: pink;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .gif-container {
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            color: rgb(214, 19, 19);
+            margin: 20px 0;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.5em;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        button:hover {
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        #yes {
+            background-color: rgb(243, 211, 248);
+            color: rgb(226, 32, 151);
+            border: 2px solid pink;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        #no {
+            background-color: rgb(243, 211, 248);
+            color: rgb(226, 32, 151);
+            border: 2px solid pink;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        #no:hover {
+            background-color: rgb(238, 233, 233);
+        }
+        #yes:hover {
+            background-color: rgb(238, 233, 233);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="gif-container">
+            <img src="{{ url_for('static', filename='rabbitnobg.png') }}" alt="Cute GIF" width="450">
+        </div>
+        <h1>Will you be my boyfriend, cutie?</h1>
+        <div class="buttons">
+            <button id="yes" onclick="location.href='/yes'">Yes, darling</button>
+            <button id="no"  onclick="location.href='/no'">No, dumboo</button>
+        </div>
+    </div>
+    <script>
+        const noButton = document.getElementById('no');
+        let hoverCount = 0;
+        const hoverTexts = ["please don't click 🥺", "Ayyoo no 😭", "No, dumboo", "I will cry now 😭", "How dare you ?? 😡"];
+
+        noButton.addEventListener('mouseover', () => {
+            if (hoverCount < 5) {
+                const x = Math.random() * (window.innerWidth - noButton.offsetWidth);
+                const y = Math.random() * (window.innerHeight - noButton.offsetHeight);
+                noButton.style.position = 'absolute';
+                noButton.style.left = x + 'px';
+                noButton.style.top = y + 'px';
+                noButton.textContent = hoverTexts[hoverCount % hoverTexts.length];
+                hoverCount++;
+            } else {
+                noButton.textContent = "😡 ok click and see";
+            }
+        });
+
+        noButton.addEventListener('click', () => {
+            if (hoverCount >= 5) {
+                location.href = '/no';
+            }
+        });
+    </script>
+</body>
+</html>
